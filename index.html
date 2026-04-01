@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pawiwahan Dharma & Nia</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans antialiased text-gray-800 overflow-hidden bg-black">
+
+    <div id="cover-page" class="fixed inset-0 z-[60] flex flex-col items-center justify-between min-h-screen bg-black bg-opacity-70 bg-[url('./cover.png')] bg-cover bg-center bg-blend-overlay text-white text-center">
+        <div class="mt-20">
+            <p class="text-sm tracking-widest uppercase mb-4">Pawiwahan</p>
+            <h1 class="text-5xl md:text-7xl font-serif font-bold mb-4">Dharma & Nia</h1>
+            <p class="text-lg tracking-[0.3em]">31 / 08 / 26</p>
+        </div>
+        <div class="mb-20">
+            <p class="text-sm mb-2">Kepada Yth Sdr/Ibu/Bpk:</p>
+            <h2 class="text-2xl font-bold mb-6">Keluarga</h2>
+            <button onclick="bukaUndangan()" class="bg-white text-black px-6 py-3 rounded-full font-semibold hover:bg-gray-200 transition duration-300 flex items-center gap-2 mx-auto cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+                </svg>
+                Buka Undangan
+            </button>
+        </div>
+    </div>
+
+    <button id="btn-kembali" onclick="tutupUndangan()" class="fixed top-6 left-6 z-50 bg-black/50 text-white p-3 rounded-full hidden hover:bg-black/80 transition backdrop-blur-sm shadow-lg cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+        </svg>
+    </button>
+
+    <button id="btn-music" onclick="toggleMusic()" class="fixed bottom-6 right-6 z-50 bg-[#ffb703] text-white p-3 rounded-full hidden hover:bg-[#fb8500] shadow-xl transition cursor-pointer">
+        <svg id="icon-music-play" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-6 h-6">
+            <path fill-rule="evenodd" d="M19.362 5.514A.75.75 0 0 1 20 6.25v12.5a3.25 3.25 0 0 1-3.25 3.25h-9.5a3.25 3.25 0 0 1-3.25-3.25V6.25a.75.75 0 0 1 .638-.736l9.5-1.357v7.058a4.25 4.25 0 1 0 2.5 3.882V6.98l-7.5 1.071v7.663a4.25 4.25 0 1 0 2.5 3.882V7.15l8.138-1.162a.75.75 0 0 1 .624.526Z" clip-rule="evenodd" />
+        </svg>
+        <svg id="icon-music-pause" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 hidden">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M14.25 9v6m-4.5 0V9M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+        </svg>
+    </button>
+
+    <div id="main-content" class="min-h-screen bg-white">
+        <section class="relative h-screen flex flex-col items-center justify-center overflow-hidden bg-black text-white">
+            <div id="slideshow-bg" class="absolute inset-0 z-0">
+                <div class="slide absolute inset-0 bg-cover bg-center opacity-100 zoom-effect" style="background-image: url('./foto1.png');"></div>
+                <div class="slide absolute inset-0 bg-cover bg-center opacity-0 zoom-effect" style="background-image: url('./foto2.png');"></div>
+                <div class="slide absolute inset-0 bg-cover bg-center opacity-0 zoom-effect" style="background-image: url('./foto3.png');"></div>
+                <div class="slide absolute inset-0 bg-cover bg-center opacity-0 zoom-effect" style="background-image: url('./foto4.png');"></div>
+                <div class="slide absolute inset-0 bg-cover bg-center opacity-0 zoom-effect" style="background-image: url('./foto5.png');"></div>
+                
+                <div class="absolute inset-0 z-1 bg-black/40"></div>
+                <div class="absolute bottom-0 left-0 right-0 z-10 bg-gradient-to-t from-[#2c2c2c] to-transparent h-[40%]"></div>
+            </div>
+            <div class="relative z-10 text-center drop-shadow-lg">
+                <p class="text-sm tracking-widest uppercase mb-4" data-aos="fade-down" data-aos-duration="1000">Pawiwahan</p>
+                <h2 class="text-5xl md:text-7xl font-serif font-bold mb-4" data-aos="zoom-in" data-aos-duration="1200">Dharma & Nia</h2>
+                <p class="text-lg tracking-[0.3em] mb-12" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">31 / 08 / 2026</p>
+            </div>
+        </section>
+
+        <section class="relative bg-[#2c2c2c] pt-24 pb-24 px-4 md:px-8"> 
+            <div data-aos="zoom-in-up" data-aos-duration="1200" class="max-w-4xl mx-auto bg-white rounded-xl shadow-2xl p-8 md:p-14 text-center z-10 relative box-interaktif">
+                <svg class="w-14 h-14 mx-auto mb-5 text-[#d4af37]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="9" cy="12" r="6"></circle>
+                    <circle cx="15" cy="12" r="6"></circle>
+                </svg>
+                
+                <h3 class="font-serif italic text-2xl md:text-3xl text-gray-800 mb-4 leading-relaxed tracking-wide">
+                    "Iha-imāv-indra sam nuda. Cakravākeva dampatī"
+                </h3>
+                <p class="text-sm text-gray-500 mb-8">(Atharvaveda : XIV.2.64)</p>
+                
+                <p class="text-gray-600 leading-relaxed text-sm md:text-base max-w-2xl mx-auto">
+                    Ya Tuhan, karuniakanlah pasangan ini cinta yang tulus, kesetiaan, dan kebahagiaan dalam rumah tangga.
+                </p>
+            </div>
+
+            <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
+                <svg viewBox="0 0 1200 120" preserveAspectRatio="none" class="relative block w-full h-[80px] md:h-[120px]">
+                    <path d="M0,0 C300,100 900,100 1200,0 L1200,120 L0,120 Z" class="fill-white"></path>
+                </svg>
+            </div>
+        </section>
+
+        <section class="bg-white py-20 px-4 md:px-8 text-center overflow-hidden border-b border-gray-100">
+            <div class="max-w-3xl mx-auto" data-aos="fade-up" data-aos-duration="1000">
+                <h2 class="font-serif text-3xl mb-6 text-gray-800 font-bold">ᬒᬁ ᬲ᭄ᬯᬲ᭄ᬢ᭄ᬬᬲ᭄ᬢᬸ</h2>
+                <p class="text-gray-500 leading-relaxed text-sm md:text-base mb-12">
+                    Atas Asung Kertha Wara Nugraha Ida Sang Hyang Widhi Wasa/Tuhan Yang Maha Esa, kami bermaksud mengundang Bapak/Ibu/Saudara/i pada Resepsi Upacara Manusa Yadnya (Pawiwahan/Pernikahan) Putra dan Putri kami
+                </p>
+            </div>
+
+            <div class="flex items-center justify-center gap-4 mb-16" data-aos="zoom-in" data-aos-duration="1000">
+                <div class="w-12 md:w-24 h-[1px] bg-[#d4af37]"></div>
+                <h2 class="font-serif text-xl md:text-2xl tracking-[0.2em] font-bold text-gray-800 uppercase">Sang Mempelai</h2>
+                <div class="w-12 md:w-24 h-[1px] bg-[#d4af37]"></div>
+            </div>
+
+            <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-8">
+                <div class="flex flex-col items-center" data-aos="zoom-in-right" data-aos-duration="1200">
+                    <img src="./nikah1.png" alt="Mempelai Pria" class="w-64 h-80 object-cover rounded-[50%] mb-8 shadow-2xl border-4 border-[#f5f5f5]">
+                    <h3 class="font-serif text-2xl font-bold mb-4 text-gray-800">I Gede Dharma Adi Putra, Str.P.</h3>
+                    <p class="text-sm text-gray-500 mb-2">Putra pertama dari pasangan</p>
+                    <p class="text-sm font-semibold text-gray-700 mb-6 px-4">Bapak I Ketut Dharma Sariada dengan Ibu Ni Wayan Rumiasih, S.H</p>
+                    <p class="text-xs text-gray-400">Br. Riang Delod Sema Gede, Desa Riang Gede, Penebel - Tabanan</p>
+                </div>
+
+                <div class="flex flex-col items-center" data-aos="zoom-in-left" data-aos-duration="1200" data-aos-delay="200">
+                    <img src="./nikah2.png" alt="Mempelai Wanita" class="w-64 h-80 object-cover rounded-[50%] mb-8 shadow-2xl border-4 border-[#f5f5f5]">
+                    <h3 class="font-serif text-2xl font-bold mb-4 text-gray-800">Ni Komang Nia Trijayani</h3>
+                    <p class="text-sm text-gray-500 mb-2">Putri pertama dari pasangan</p>
+                    <p class="text-sm font-semibold text-gray-700 mb-6 px-4">Bapak Mbok Mang Nia Tri dengan Ibu Mbok Mang Nia Tri</p>
+                    <p class="text-xs text-gray-400">Br. Jineng, Desa Jineng Dalem, Singaraja - Buleleng</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-[#fdfbf7] py-20 px-4 md:px-8 text-center overflow-hidden border-b border-gray-100">
+            <div class="flex items-center justify-center gap-4 mb-16" data-aos="zoom-in" data-aos-duration="1000">
+                <div class="w-12 md:w-24 h-[1px] bg-[#d4af37]"></div>
+                <h2 class="font-serif text-xl md:text-2xl tracking-[0.2em] font-bold text-gray-800 uppercase">
+                    ᬉᬧᬘᬭ ᬫᬾᬧᬦ᭄ᬤᬾᬲ᭄ <br>
+                    Upacara Mepandes
+                </h2>
+                <div class="w-12 md:w-24 h-[1px] bg-[#d4af37]"></div>
+            </div>
+
+            <div class="max-w-4xl mx-auto flex flex-col items-center" data-aos="zoom-in-up" data-aos-duration="1200">
+                <img src="./wahyu.png" alt="I Made Wahyu Aditya Putra" class="w-64 h-80 object-cover rounded-[50%] mb-8 shadow-2xl border-4 border-[#f5f5f5]">
+                <h3 class="font-serif text-2xl font-bold mb-4 text-gray-800 px-4">
+                    I Made Wahyu Aditya Putra
+                </h3>
+                <p class="text-sm text-gray-500 mb-2">Putra kedua dari pasangan</p>
+                <p class="text-sm font-semibold text-gray-700 mb-6 px-4">Bapak I Ketut Dharma Sariada dengan Ibu Ni Wayan Rumiasih, S.H</p>
+            </div>
+        </section>
+
+        <section id="info-acara" class="bg-white py-20 px-4 md:px-8 text-center overflow-hidden border-b border-gray-100">
+            <div class="flex items-center justify-center gap-4 mb-12" data-aos="zoom-in" data-aos-duration="1000">
+                <div class="w-12 md:w-24 h-[1px] bg-[#d4af37]"></div>
+                
+                <div class="flex flex-col items-center">
+                    <img src="./atas-emas.png" alt="Ornaments Emas" class="h-20 md:h-20 w-30 object-contain" data-aos="zoom-in" data-aos-duration="1000">
+                    <h2 class="font-serif text-xl md:text-2xl tracking-[0.2em] font-bold text-gray-800 uppercase">Info Acara</h2>
+                </div>
+                
+                <div class="w-12 md:w-24 h-[1px] bg-[#d4af37]"></div>
+            </div>
+
+            <div class="max-w-5xl mx-auto relative rounded-2xl overflow-hidden shadow-2xl" data-aos="fade-up" data-aos-duration="1200">
+                <div class="absolute inset-0 bg-[url('./info-bg.png')] bg-cover bg-center"></div>
+                <div class="absolute inset-0 bg-black/60"></div>
+
+                <div class="relative z-10 p-10 md:p-16 flex flex-col items-center text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 mb-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418" /></svg>
+                    
+                    <div class="flex items-start md:items-center gap-3 mb-4 text-left md:text-center max-w-2xl">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                        <p class="text-sm md:text-base">Jln. Riang Delod Sema Gede, Br. Riang Delod Sema Gede, Desa Riang Gede, Penebel - Tabanan</p>
+                    </div>
+
+                    <div class="flex items-center gap-3 mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                        <p class="text-sm md:text-base">Senin, 31 Agustus 2026</p>
+                    </div>
+
+                    <div class="flex items-center gap-3 mb-10">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0 1 18 0z" /></svg>
+                        <p class="text-sm md:text-base">17.00 WITA - selesai</p>
+                    </div>
+
+                    <a href="https://maps.app.goo.gl/yewd54GMpP4fuCNKA" target="_blank" rel="noopener noreferrer" class="bg-white text-black px-8 py-3 rounded-full font-bold hover:bg-gray-200 transition duration-300 flex items-center gap-2 mb-12 text-sm md:text-base shadow-lg cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                        Google Map
+                    </a>
+
+                    <h3 class="font-serif italic text-2xl md:text-3xl text-[#d4af37] mb-6">Waktu Menuju Acara</h3>
+
+                    <div id="countdown" class="flex justify-center gap-3 md:gap-6 text-white w-full" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="200">
+                        <div class="flex flex-col items-center justify-center bg-black/40 backdrop-blur-sm rounded-lg p-3 w-16 md:w-20 border border-white/20"><span id="hari" class="text-2xl md:text-3xl font-serif font-bold">00</span><span class="text-[10px] md:text-xs uppercase tracking-widest mt-1">Hari</span></div>
+                        <div class="flex flex-col items-center justify-center bg-black/40 backdrop-blur-sm rounded-lg p-3 w-16 md:w-20 border border-white/20"><span id="jam" class="text-2xl md:text-3xl font-serif font-bold">00</span><span class="text-[10px] md:text-xs uppercase tracking-widest mt-1">Jam</span></div>
+                        <div class="flex flex-col items-center justify-center bg-black/40 backdrop-blur-sm rounded-lg p-3 w-16 md:w-20 border border-white/20"><span id="menit" class="text-2xl md:text-3xl font-serif font-bold">00</span><span class="text-[10px] md:text-xs uppercase tracking-widest mt-1">Menit</span></div>
+                        <div class="flex flex-col items-center justify-center bg-black/40 backdrop-blur-sm rounded-lg p-3 w-16 md:w-20 border border-white/20"><span id="detik" class="text-2xl md:text-3xl font-serif font-bold">00</span><span class="text-[10px] md:text-xs uppercase tracking-widest mt-1">Detik</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="gallery" class="bg-white py-20 px-4 md:px-8 text-center overflow-hidden border-b border-gray-100">
+            <div class="flex items-center justify-center gap-4 mb-16" data-aos="zoom-in" data-aos-duration="1000">
+                <div class="w-12 md:w-24 h-[1px] bg-[#d4af37]"></div>
+                
+                <div class="flex flex-col items-center">
+                    <img src="./atas-emas.png" alt="Ornaments Emas" class="h-20 md:h-20 w-30 object-contain" data-aos="zoom-in" data-aos-duration="1000">
+                    <h2 class="font-serif text-xl md:text-2xl tracking-[0.2em] font-bold text-gray-800 uppercase">Wedding Gallery</h2>
+                </div>
+                
+                <div class="w-12 md:w-24 h-[1px] bg-[#d4af37]"></div>
+            </div>
+
+            <div class="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-3 gap-4">
+                <div class="overflow-hidden rounded-lg aspect-[3/4] box-interaktif shadow-lg" data-aos="zoom-in" data-aos-duration="800" onclick="openLightbox(0)"><img src="./galeri1.png" alt="Gallery 1" class="w-full h-full object-cover"></div>
+                <div class="overflow-hidden rounded-lg aspect-[3/4] box-interaktif shadow-lg" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="100" onclick="openLightbox(1)"><img src="./galeri2.png" alt="Gallery 2" class="w-full h-full object-cover"></div>
+                <div class="overflow-hidden rounded-lg aspect-[3/4] box-interaktif shadow-lg" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="200" onclick="openLightbox(2)"><img src="./galeri3.png" alt="Gallery 3" class="w-full h-full object-cover"></div>
+                <div class="overflow-hidden rounded-lg aspect-[3/4] box-interaktif shadow-lg" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="300" onclick="openLightbox(3)"><img src="./galeri4.png" alt="Gallery 4" class="w-full h-full object-cover"></div>
+                <div class="overflow-hidden rounded-lg aspect-[3/4] box-interaktif shadow-lg" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="400" onclick="openLightbox(4)"><img src="./galeri5.png" alt="Gallery 5" class="w-full h-full object-cover"></div>
+                <div class="overflow-hidden rounded-lg aspect-[3/4] box-interaktif shadow-lg" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="500" onclick="openLightbox(5)"><img src="./galeri6.png" alt="Gallery 6" class="w-full h-full object-cover"></div>
+                <div class="overflow-hidden rounded-lg aspect-[3/4] box-interaktif shadow-lg" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="600" onclick="openLightbox(6)"><img src="./galeri7.png" alt="Gallery 7" class="w-full h-full object-cover"></div>
+                <div class="overflow-hidden rounded-lg aspect-[3/4] box-interaktif shadow-lg" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="700" onclick="openLightbox(7)"><img src="./galeri8.png" alt="Gallery 8" class="w-full h-full object-cover"></div>
+                <div class="overflow-hidden rounded-lg aspect-[3/4] box-interaktif shadow-lg" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="800" onclick="openLightbox(8)"><img src="./galeri9.png" alt="Gallery 9" class="w-full h-full object-cover"></div>
+                <div class="overflow-hidden rounded-lg aspect-[3/4] box-interaktif shadow-lg" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="900" onclick="openLightbox(9)"><img src="./galeri10.png" alt="Gallery 10" class="w-full h-full object-cover"></div>
+                <div class="overflow-hidden rounded-lg aspect-[3/4] box-interaktif shadow-lg" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="1000" onclick="openLightbox(10)"><img src="./galeri11.png" alt="Gallery 11" class="w-full h-full object-cover"></div>
+                <div class="overflow-hidden rounded-lg aspect-[3/4] box-interaktif shadow-lg" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="1100" onclick="openLightbox(11)"><img src="./galeri12.png" alt="Gallery 12" class="w-full h-full object-cover"></div>
+            </div>
+        </section>
+
+        <section id="video" class="w-full bg-black">
+            <div class="w-full aspect-video" data-aos="fade-up" data-aos-duration="1200">
+                <video class="w-full h-full object-cover" controls preload="metadata">
+                    <source src="./video-wedding.mp4" type="video/mp4">
+                    Maaf, browser Anda tidak mendukung pemutaran video ini.
+                </video>
+            </div>
+        </section>
+
+        <section id="rsvp" class="bg-white pt-20 relative border-b border-gray-100">
+            <div class="flex items-center justify-center gap-4 mb-8" data-aos="zoom-in" data-aos-duration="1000">
+                <div class="w-12 md:w-24 h-[1px] bg-[#d4af37]"></div>
+                
+                <div class="flex flex-col items-center">
+                    <img src="./atas-emas.png" alt="Ornaments Emas" class="h-20 md:h-20 w-30 object-contain" data-aos="zoom-in" data-aos-duration="1000">
+                    <h2 class="font-serif text-xl md:text-2xl tracking-[0.2em] font-bold text-gray-800 uppercase">Konfirmasi Tamu</h2>
+                </div>
+                
+                <div class="w-12 md:w-24 h-[1px] bg-[#d4af37]"></div>
+            </div>
+
+            <div class="max-w-3xl mx-auto text-center px-4 pb-20" data-aos="fade-up" data-aos-duration="1200">
+                <p class="text-gray-600 mb-8 text-sm md:text-base">Dimohon kesediaannya untuk mengisi form kehadiran undangan kami</p>
+                
+                <form id="rsvp-form" class="flex flex-col gap-4 text-left">
+                    <input type="text" name="Nama" placeholder="Nama" class="w-full p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-[#d4af37] text-gray-800 shadow-sm border border-gray-200" required>
+                    <input type="number" name="Jumlah" placeholder="Jumlah" min="1" class="w-full p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-[#d4af37] text-gray-800 shadow-sm border border-gray-200" required>
+                    
+                    <div class="relative">
+                        <select name="Status" class="w-full p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-[#d4af37] text-gray-800 appearance-none bg-white shadow-sm border border-gray-200" required>
+                            <option value="" disabled selected>Silahkan pilih</option>
+                            <option value="Hadir">Hadir</option>
+                            <option value="Tidak Hadir">Tidak Hadir</option>
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-700">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                        </div>
+                    </div>
+
+                    <textarea name="Ucapan" rows="4" placeholder="Ketikan Ucapan / Doa" class="w-full p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-[#d4af37] text-gray-800 shadow-sm border border-gray-200" required></textarea>
+                    
+                    <button type="submit" id="btn-submit" class="w-full bg-[#d4af37] hover:bg-[#b8952b] text-white font-bold tracking-widest py-3 mt-4 rounded-md transition duration-300 shadow-lg cursor-pointer">
+                        <span id="btn-text">KIRIM DATA</span>
+                        <span id="btn-loading" class="loader hidden border-white border-t-white"></span>
+                    </button>
+                </form>
+                
+                <div id="wishes-container" class="mt-12 text-left bg-gray-50 p-6 rounded-lg shadow-inner max-h-96 overflow-y-auto custom-scrollbar"></div>
+            </div>
+        </section>
+
+        <section id="penutup" class="relative w-full">
+            <div class="absolute inset-0 z-0">
+                <img src="./akhir.png" alt="Background Penutup" class="w-full h-full object-cover object-center">
+                <div class="absolute inset-0 bg-gradient-to-b from-white via-white/40 to-transparent h-1/3"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+            </div>
+
+            <div class="relative z-10 w-full flex flex-col items-center">
+                
+                <div class="w-full py-16 text-center px-4" data-aos="fade-up" data-aos-duration="1000">
+                    <p class="text-gray-800 font-medium max-w-2xl mx-auto mb-6 text-sm md:text-base drop-shadow-sm">
+                        Merupakan suatu kehormatan dan kebahagiaan kami, apabila Bapak/Ibu/Saudara/i berkenan hadir memberikan doa restu
+                    </p>
+                    <h2 class="font-serif text-2xl md:text-4xl font-bold text-gray-800 drop-shadow-md">
+                       ᬒᬁ ᬰᬵᬦ᭄ᬢᬶᬄ ᬰᬵᬦ᭄ᬢᬶᬄ ᬰᬵᬦ᭄ᬢᬶᬄ ᬒᬁ
+                    </h2>
+                </div>
+
+                <div class="w-full min-h-[300px] md:min-h-[500px]"></div>
+
+                <div class="w-full text-center pb-12 pt-10 px-4" data-aos="fade-up" data-aos-duration="1200">
+                    <h3 class="font-serif italic text-3xl md:text-4xl text-white drop-shadow-md mb-2">Kami Yang Berbahagia</h3>
+                    <p class="font-sans font-medium text-lg md:text-xl text-white tracking-widest drop-shadow-md mb-10">Dharma & Nia</p>
+
+                    <div class="text-xs text-white/80 mb-6 flex flex-col items-center justify-center gap-3">
+                        <span>© 2026 Invitation by <span class="text-[#d4af37] font-semibold">Wahyu Aditya</span></span>
+                        <a href="https://www.instagram.com/yuadtya/" target="_blank" rel="noopener noreferrer" class="bg-white text-black w-10 h-10 rounded flex items-center justify-center hover:bg-gray-200 hover:scale-105 transition duration-300 shadow-lg cursor-pointer">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 1.76-6.98 6.208-.058 1.281-.072 1.688-.072 4.948s.014 3.666.072 4.947c.2 4.458 2.64 5.998 6.98 6.208 1.281.058 1.689.072 4.947.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-1.771 6.98-6.208.058-1.28.072-1.689.072-4.947 0-3.259-.014-3.667-.072-4.948-.196-4.456-2.615-6.008-6.98-6.208-1.281-.058-1.689-.072-4.948-.072zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <audio id="bg-music" loop><source src="./lagu-pernikahan.mp3" type="audio/mpeg"></audio>
+
+    <div id="lightbox" class="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 hidden transition-opacity duration-300 opacity-0" onclick="closeLightboxOutside(event)">
+        <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white text-4xl hover:text-gray-400 cursor-pointer z-[110]">×</button>
+        <div class="relative max-w-4xl w-[90%] h-[80vh] flex items-center justify-center p-4">
+            <button onclick="changeImageGaleri(-1)" class="absolute left-[-50px] md:left-[-70px] text-white/50 hover:text-white text-5xl md:text-6xl p-4 cursor-pointer z-[110]">‹</button>
+            <img id="lightbox-img" src="" alt="Fokus Galeri" class="max-w-full max-h-full object-contain shadow-2xl rounded-lg transition-opacity duration-150 border-4 border-[#d4af37]">
+            <button onclick="changeImageGaleri(1)" class="absolute right-[-50px] md:right-[-70px] text-white/50 hover:text-white text-5xl md:text-6xl p-4 cursor-pointer z-[110]">›</button>
+        </div>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
